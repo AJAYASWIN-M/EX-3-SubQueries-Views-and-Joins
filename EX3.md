@@ -69,45 +69,67 @@ INSERT INTO DEPT (DEPTNO, DNAME, LOC) VALUES (40, 'OPERATIONS', 'BOSTON');
 
 
 ### QUERY:
-
+```sql
+select ename from emp where salary > (select salary from emp where empno=7566);
+```
 
 ### OUTPUT:
+![EX 3- (1)](https://github.com/AJAYASWIN-M/EX-3-SubQueries-Views-and-Joins/assets/118679692/7ee565da-ba90-4989-ab0c-9314e01bc543)
+
 
 ### Q2) List the ename,job,sal of the employee who get minimum salary in the company.
 
 ### QUERY:
-
+```sql
+ SELECT ename, job, sal FROM emp WHERE sal = (SELECT min(sal) FROM emp);
+```
 
 ### OUTPUT:
+![EX 3- (2)](https://github.com/AJAYASWIN-M/EX-3-SubQueries-Views-and-Joins/assets/118679692/8c4644a6-d9b8-422d-855e-0efacd60e2f5)
 
 ### Q3) List ename, job of the employees who work in deptno 10 and his/her job is any one of the job in the department ‘SALES’.
 
 ### QUERY:
-
+```sql
+SELECT ename, job FROM emp WHERE deptno = 10 AND job IN (SELECT job FROM emp WHERE job = 'SALES');
+```
 
 ### OUTPUT:
 
+![EX 3- (3)](https://github.com/AJAYASWIN-M/EX-3-SubQueries-Views-and-Joins/assets/118679692/7c14973b-491c-410e-83c8-b8d488f8e2ef)
 
 ### Q4) Create a view empv5 (for the table emp) that contains empno, ename, job of the employees who work in dept 10.
 
 ### QUERY:
-
+```sql
+create view empv5 as select ename,job,deptno from emp where deptno=10;
+```
 
 ### OUTPUT:
+
+![EX 3- (4)](https://github.com/AJAYASWIN-M/EX-3-SubQueries-Views-and-Joins/assets/118679692/099869bb-da96-4dfc-a8f4-04a15aaaf8a9)
+
 
 ### Q5) Create a view with column aliases empv30 that contains empno, ename, sal of the employees who work in dept 30. Also display the contents of the view.
 
 ### QUERY:
-
+```sql
+create  view empv30 as select empno as "eno" , ename as "empname" , sal as "esal" from emp where deptno = 30;
+```
 
 ### OUTPUT:
+![EX 3- (5)](https://github.com/AJAYASWIN-M/EX-3-SubQueries-Views-and-Joins/assets/118679692/b3d9b407-a5cf-418b-a9f9-cc6a7786c49e)
+
 
 ### Q6) Update the view empv5 by increasing 10% salary of the employees who work as ‘CLERK’. Also confirm the modifications in emp table
 
 ### QUERY:
-
+```sql
+update empv5 set sal=sal*1.1 where job='CLERK';
+```
 
 ### OUTPUT:
+![EX 3- (6)](https://github.com/AJAYASWIN-M/EX-3-SubQueries-Views-and-Joins/assets/118679692/58505bdd-2a7c-465a-9501-12e3866339f9)
 
 ## Create a Customer1 Table
 ```sql
@@ -140,28 +162,52 @@ INSERT INTO Salesman1 (salesman_id, name, city, commission) VALUES(5003, 'Lauson
 ### Q7) Write a SQL query to find the salesperson and customer who reside in the same city. Return Salesman, cust_name and city.
 
 ### QUERY:
-
+```sql
+SELECT salesman1.name AS "Salesman", customer1.cust_name AS "Customer Name", salesman1.city AS "City"
+FROM salesman1 INNER JOIN customer1 ON salesman1.city = customer1.city;
+```
 
 ### OUTPUT:
+![EX 3- (7)](https://github.com/AJAYASWIN-M/EX-3-SubQueries-Views-and-Joins/assets/118679692/44859a1d-1382-4f46-bea7-ee785f21067e)
 
 ### Q8) Write a SQL query to find salespeople who received commissions of more than 13 percent from the company. Return Customer Name, customer city, Salesman, commission.
 
 
 ### QUERY:
-
+```sql
+SELECT customer1.cust_name AS "Customer Name", customer1.city AS "Customer City",salesman1.name AS "SALESMAN",
+salesman1.commission AS "Commission" FROM salesman1 INNER JOIN customer1 ON salesman1.salesman_id =
+customer1.salesman_id WHERE salesman1.commission > 0.13;
+```
 
 ### OUTPUT:
+![EX 3- (8)](https://github.com/AJAYASWIN-M/EX-3-SubQueries-Views-and-Joins/assets/118679692/3201cd97-5077-4cbc-a171-c77f27ac52b3)
 
 ### Q9) Perform Natural join on both tables
 
 ### QUERY:
-
+```sql
+select * from customer1 natural join salesman1 ;
+```
 
 ### OUTPUT:
+![EX 3- (9)](https://github.com/AJAYASWIN-M/EX-3-SubQueries-Views-and-Joins/assets/118679692/529efaa1-a687-45f4-9a27-ad8c31a2b139)
 
 ### Q10) Perform Left and right join on both tables
 
 ### QUERY:
-
+```sql
+select * from customer1 left join salesman1 on salesman1.salesman_id = customer1.salesman_id;
+select * from customer1 right join salesman1 on salesman1.salesman_id = customer1.salesman_id;
+```
 
 ### OUTPUT:
+#### left join:
+![EX 3- (10)](https://github.com/AJAYASWIN-M/EX-3-SubQueries-Views-and-Joins/assets/118679692/3b4003b4-06f9-4ba3-9e15-5b85da83d1fd)
+
+
+#### right join:
+![EX 3- (11)](https://github.com/AJAYASWIN-M/EX-3-SubQueries-Views-and-Joins/assets/118679692/65a5729f-5e73-4c65-aaa5-fbe4fbc89809)
+
+### RESULT :
+Thus, the Employee, Salesman and Customer database is created and Subqueries, Views and Joins are executed using SQL Successfully .
