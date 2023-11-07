@@ -1,6 +1,6 @@
 # EX 3 SubQueries, Views and Joins 
 
-## DATE:
+## DATE:18/8/23
 
 ## Create employee Table
 ```sql
